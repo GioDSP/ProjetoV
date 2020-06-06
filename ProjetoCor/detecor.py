@@ -1,8 +1,17 @@
-from cv2 import cv2
+import cv2
+import csv
 import numpy
 
 img = cv2.imread("red.jpg")
 
-#color= int(img[0,0])
+arq = open("colors.csv.txt")
+colors = csv.DictReader(arq,["nome", "Name", "Código","Red", "Green", "Blue"], delimiter=',')
 
-print(type(img))
+for row in colors:
+    if list(img[0,0]) == list(map(int, [row["Blue"], row["Green"], row["Red"]])):
+        print(row["Name"])
+        break
+    else:
+        continue
+
+arq.close()
